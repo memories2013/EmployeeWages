@@ -2,51 +2,48 @@ package com.employee;
 
 public class MainClass {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public void calculate( int no_of_days, int max_hrs_in_month, int wages_per_hr){
+
+		int  is_part_time = 1;
+		int  is_full_time = 2;
+		int  part_time_hrs = 4;
+		int full_time_hrs = 8;
 		int wage = 0;
-		int days = 0, hours = 0;
-		int flag = 0;
-		while (days < 20 && hours < 100) {
-			int attendance = (int)Math.floor( (Math.random() * 10) % 2);
-			double partTime = Math.floor( (Math.random() * 10) % 2);
-			switch (attendance) {
+		int days = 0;
+		int hours = 0;
+
+		while(days < no_of_days && hours < max_hrs_in_month){
+
+				int attendance = ((int)Math.floor((Math.random)*10)%3);
+				switch(attendance){
+
 				case 0:
-					System.out.println(" Employee is absent. ");
-					break;
-					
-				case 1: 
-					if (partTime != 0) {
-						wage += 160;
-						hours += 8;
-						if (hours > 100) {
-							flag = 1;
-						}
-					}
-					else {
-						hours += 8;
-						wage += 160;
-						if (hours > 100) {
-							flag = 2;
-						}
-					}
-					days++;
-					System.out.println(" Employess is present");
-					System.out.println(" The wages earned = " + wage);
-					break;				
-			}
+						break;
+
+				case is_part_time:
+											if(hours + part_time_hrs >100){
+											break;
+											}
+											hours += part_time_hrs;
+											days++;
+											break;
+
+				case is_full_time:
+											if(hours + full_time_hrs >100){
+											break;
+											}
+											hours += full_time_hrs;
+											days++;
+											break;
+
+				}
+
 		}
-		
-		if (flag == 1) {
-			hours -= 8;
-			days--;
-		}
-		else if (flag == 2) {
-			hours -= 8;
-			days--;
-		}
-		System.out.println(" Total working days = " + days);
-		System.out.println(" Total working hours = " + hours);
+				wage = hours * wages_per_hr;
+				System.out.println(" Total wages earned = " + wage);
+				System.out.println(" Total working days = " + days);
+				System.out.println(" Total working hours = " + hours);
+
 	}
 
 }
